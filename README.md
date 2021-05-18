@@ -6,7 +6,12 @@
 
 * 请统一使用默认的 8080 端口，无需使用 HTTPS；
 * 需编写尽可能完善的自动化测试；
-* 数据库使用 MySQL 8.0.22，测试数据库使用 H2。Mysql端口使用 3333，用户使用 `root`，密码为 `final_quiz`，database 名字为 `final_quiz`。
+* 使用Docker Compose来初始化程序数据库和测试数据库
+  - 版本：MySQL 8.0.22 
+  - Mysql端口： 3333 / 测试：3334
+  - 用户使用 `root`
+  - 密码为 `final_quiz` / 测试： `final_quiz_test`
+  - database 名字为 `final_quiz` / 测试： `final_quiz_test`
 
 ## 注意
 本次 quiz 后端部分的`完成度`维度将由自动化测试自动判定，请**严格按照**作业要求来实现，保证各个细节上准确无误。例如：
