@@ -6,11 +6,11 @@
 
 * 请统一使用默认的 8080 端口，无需使用 HTTPS；
 * 需编写尽可能完善的自动化测试；
-* 使用Docker Compose来初始化程序数据库和测试数据库
+* 使用Docker Compose来初始化开发数据库和测试数据库
   - 版本：MySQL 8.0.22 
   - Mysql端口： 3333 / 测试：3334
   - 用户使用 `root`
-  - 密码为 `final_quiz` / 测试： `final_quiz_test`
+  - 密码为 `finalquiz` / 测试： `finalquiztest`
   - database 名字为 `final_quiz` / 测试： `final_quiz_test`
 
 ## 注意
@@ -31,7 +31,11 @@
 * 一个英文字母，如`A`，或一个汉字，如`汉`，均视为一个`字符`，暂不考虑其它语言文字或表情符号。
 
 ## 系统界面
+
+> **请注意，界面是帮助你理解需求，无需开发任何前端页面**
+
 ![系统界面](./system.png)
+
 ## 需求列表
 - 在学员列表可以查看“未分组”学员的基本信息，包含学员ID、姓名
 - 在讲师列表可以查看“未分组”讲师的基本信息，包含讲师ID、姓名
@@ -47,7 +51,7 @@
 - 当用户点击“添加讲师”按钮时，进入编辑模式，能够在输入框中添加讲师姓名，讲师可以重名；触发“Enter”键创建讲师，系统自动分配讲师ID；添加讲师不会触发自动分组
 - 当用户点击“添加学员”按钮时，进入编辑模式，能够在输入框中添加学员姓名，学员可以重名；触发“Enter”键创建学员，系统自动分配学员ID；添加学员不会触发自动分组
 
-> 注意：只需要开发需求对应的后端接口即可，不需要实现前端交互，接口列表已在下方列出
+> **注意：只需要开发需求对应的后端接口即可，不需要实现前端交互，接口列表已在下方列出**
 
 ## 术语表
 
@@ -92,8 +96,8 @@ GET /trainees?grouped=false
 
 | 字段:类型          | 说明               |
 | ------------------ | ------------------ |
-| id:long            | ID。               |
-| name:string        | 名字。             |
+| id:long            | ID               |
+| name:string        | 名字             |
 
 #### EXAMPLE
 
@@ -139,8 +143,8 @@ POST /trainees
 
 | 字段:类型      | 说明               |
 | --------------|------------------ |
-| id:long       | ID。               |
-| name:string   | 名字。             |
+| id:long       | ID               |
+| name:string   | 名字             |
 
 #### EXAMPLE
 
@@ -231,7 +235,7 @@ POST /trainers
 
 | 字段:类型      | 校验要求 | 说明            |
 | --------------|---- | ------------------ |
-| name:string   | 非空 | 名字。              |
+| name:string   | 非空 | 名字              |
 
 #### RESPONSE
 
@@ -249,8 +253,8 @@ POST /trainers
 
 | 字段:类型      | 说明               |
 | --------------|------------------- |
-| id:long       | ID。               |
-| name:string   | 名字。             |
+| id:long       | ID               |
+| name:string   | 名字             |
 
 #### EXAMPLE
 
@@ -272,7 +276,7 @@ DELETE /trainers/{trainer_id}
 
 | 字段:类型      | 说明                |
 | --------------| ------------------ |
-| trainer_id:long | Trainer ID。     |
+| trainer_id:long | Trainer ID     |
 
 #### RESPONSE
 
@@ -310,10 +314,10 @@ GET /groups
 
 | 字段:类型      | 说明               |
 | --------------|------------------- |
-| id:long       | ID。               |
-| name:string   | 分组名字。           |
-| trainers:list | 分组内包含的讲师列表。 |
-| trainees:list | 分组内包含的学员列表。 |
+| id:long       | ID               |
+| name:string   | 分组名字           |
+| trainers:list | 分组内包含的讲师列表 |
+| trainees:list | 分组内包含的学员列表 |
 
 #### EXAMPLE
 
@@ -385,10 +389,10 @@ POST /groups/auto-grouping
 
 | 字段:类型      | 说明               |
 | --------------|------------------- |
-| id:long       | ID。               |
-| name:string   | 分组名字。           |
-| trainers:list | 分组内包含的讲师列表。 |
-| trainees:list | 分组内包含的学员列表。 |
+| id:long       | ID               |
+| name:string   | 分组名字           |
+| trainers:list | 分组内包含的讲师列表 |
+| trainees:list | 分组内包含的学员列表 |
 
 #### EXAMPLE
 
@@ -446,12 +450,12 @@ $ curl -X POST localhost:8080/groups/auto-grouping
 
 | HTTP Status Code    | Summary                                                  |
 | ------------------- | -------------------------------------------------------- |
-| 200 - OK            | 查询操作一切正常，返回 200 及查询结果。                  |
-| 201 - Created       | 创建操作成功，返回 201。                                 |
-| 204 - No Content    | 用于 DELETE 或 某些 POST 等操作无返回数据时。                        |
-| 400 - Bad Request   | 请求参数不符合要求，通常是因为参数格式不正确或参数缺失。 |
-| 404 - Not Found     | 请求的资源不存在。                                       |
-| 500 - Server Errors | 请求在处理时遇到服务器错误。                                   |
+| 200 - OK            | 查询操作一切正常，返回 200 及查询结果                  |
+| 201 - Created       | 创建操作成功，返回 201                                 |
+| 204 - No Content    | 用于 DELETE 或 某些 POST 等操作无返回数据时                        |
+| 400 - Bad Request   | 请求参数不符合要求，通常是因为参数格式不正确或参数缺失 |
+| 404 - Not Found     | 请求的资源不存在                                       |
+| 500 - Server Errors | 请求在处理时遇到服务器错误                                  |
 
 除了返回对应的 status code 外，对于出错的情况，还需返回 Error 对象，字段如下：
 
