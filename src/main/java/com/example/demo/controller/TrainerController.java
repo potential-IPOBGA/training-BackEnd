@@ -17,7 +17,6 @@ public class TrainerController {
     @Autowired
     private TrainerService trainerService;
 
-//    GET /trainers?grouped=false
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Trainer> getTrainerWithoutGroup (@RequestParam("grouped") Boolean grouped){
@@ -26,14 +25,14 @@ public class TrainerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Trainer saveTrainer (@RequestBody @Valid Trainer trainer){
-        return trainerService.saveTrainer(trainer);
+    public TrainerResponse saveTrainer (@RequestBody @Valid Trainer trainer){
+        final Trainer saveTrainer = trainerService.saveTrainer(trainer);
+        return new TrainerResponse(saveTrainer.getId(),saveTrainer.getName());
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTrainer(@PathVariable("id") Long id) {
-
         trainerService.deleteTrainer(id);
     }
 

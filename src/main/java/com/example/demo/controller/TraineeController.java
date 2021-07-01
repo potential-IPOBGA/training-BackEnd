@@ -17,7 +17,6 @@ public class TraineeController {
     @Autowired
     private TraineeService traineeService;
 
-//    GET /trainers?grouped=false
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public List<Trainee> getTraineeWithoutGroup (@RequestParam("grouped") Boolean grouped){
@@ -26,8 +25,9 @@ public class TraineeController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Trainee saveTrainer (@RequestBody @Valid Trainee trainee){
-        return traineeService.saveTrainee(trainee);
+    public TraineeResponse saveTrainer (@RequestBody @Valid Trainee trainee){
+        final Trainee saveTrainee = traineeService.saveTrainee(trainee);
+        return new TraineeResponse(saveTrainee.getId(),saveTrainee.getName());
     }
 
     @DeleteMapping("/{id}")

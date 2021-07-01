@@ -19,9 +19,13 @@ services:
       MYSQL_PASSWORD: 'finalquiz'
       MYSQL_ROOT_PASSWORD: 'finalquiz'
     ports:
-      - '3333:3333'
+      - '3333:3306'
     volumes:
       - $PWD/data:/var/lib/mysql-production
+    command:
+      --server_id=100
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
 
   mysqltest:
     image: mysql:8.0.22
@@ -32,6 +36,10 @@ services:
       MYSQL_PASSWORD: 'finalquiz_test'
       MYSQL_ROOT_PASSWORD: 'finalquiz'
     ports:
-      - '3334:3334'
+      - '3334:3306'
     volumes:
       - $PWD/data:/var/lib/mysql-test
+    command:
+      --server_id=200
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
