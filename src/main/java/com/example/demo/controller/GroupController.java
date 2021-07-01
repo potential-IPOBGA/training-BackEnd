@@ -4,6 +4,7 @@ import com.example.demo.beans.Group;
 import com.example.demo.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ public class GroupController {
         return groupService.getGroups();
     }
 
-    @GetMapping("/auto-grouping")
+    @PostMapping("/auto-grouping")
     public List<Group> autoGroup () {
         return groupService.autoGroup();
     }

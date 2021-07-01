@@ -12,6 +12,7 @@ services:
       - mysqltest
   mysqlproduction:
     image: mysql:8.0.22
+    restart: always
     container_name: mysqlproduction
     environment:
       MYSQL_DATABASE: 'final_quiz'
