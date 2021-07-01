@@ -23,6 +23,6 @@ public class GroupController {
 
     @GetMapping("/auto-grouping")
     public List<Group> autoGroup () {
-        return groupService.AtuoGroup();
+        return groupService.autoGroup();
     }
 }

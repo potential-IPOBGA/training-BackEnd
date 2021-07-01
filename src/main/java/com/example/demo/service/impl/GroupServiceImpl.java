@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.beans.Group;
 import com.example.demo.beans.Trainee;
 import com.example.demo.beans.Trainer;
+import com.example.demo.exception.TrainerNumberException;
 import com.example.demo.repository.GroupRepository;
 import com.example.demo.repository.TraineeRepository;
 import com.example.demo.repository.TrainerRepository;
@@ -30,30 +31,42 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<Group> AtuoGroup() {
+    public List<Group> autoGroup () {
         List<Group> allGroup = groupRepository.findAll();
         List<Trainee> allTrainees = traineeRepository.findAll();
         List<Trainer> allTrainers = trainerRepository.findAll();
-
-        shuffleAllLists(allGroup, allTrainees, allTrainers);
-
-        int groupSize = (int)Math.floor(allTrainees.size() / 2.0);
-
-        for (int i = 0; i < allTrainees.size(); i++) {
-            allGroup.get(i % groupSize).getTrainees().add(allTrainees.get(i));
-            allTrainees.get(i).setGrouped(true);
-            traineeRepository.save(allTrainees.get(i));
+        if ((long) allTrainers.size() < 2) {
+            throw new TrainerNumberException();
         }
+        shuffleAllLists(allGroup, allTrainees, allTrainers);
+        int groupSize = (int)Math.floor(allTrainees.size() / 2.0);
+        groupTrainees(allGroup, allTrainees, groupSize);
+        groupTrainers(allGroup, allTrainers, groupSize);
+        saveGroup(allGroup);
+
+        return groupRepository.findAll();
+    }
+
+    private void saveGroup (List<Group> allGroup) {
+        for(Group group : allGroup) {
+            groupRepository.save(group);
+        }
+    }
+
+    private void groupTrainers (List<Group> allGroup, List<Trainer> allTrainers, int groupSize) {
         for (int i = 0; i < allTrainers.size(); i++) {
             allGroup.get(i % groupSize).getTrainers().add(allTrainers.get(i));
             allTrainers.get(i).setGrouped(true);
             trainerRepository.save(allTrainers.get(i));
         }
-        for(Group group : allGroup) {
-            groupRepository.save(group);
-        }
+    }
 
-        return groupRepository.findAll();
+    private void groupTrainees (List<Group> allGroup, List<Trainee> allTrainees, int groupSize) {
+        for (int i = 0; i < allTrainees.size(); i++) {
+            allGroup.get(i % groupSize).getTrainees().add(allTrainees.get(i));
+            allTrainees.get(i).setGrouped(true);
+            traineeRepository.save(allTrainees.get(i));
+        }
     }
 
     private void shuffleAllLists (List<Group> allGroup, List<Trainee> allTrainees, List<Trainer> allTrainers) {

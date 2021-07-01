@@ -7,5 +7,5 @@ import java.util.List;
 public interface GroupService {
     List<Group> getGroups();
 
-    List<Group> AtuoGroup();
+    List<Group> autoGroup ();
 }

@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 import com.example.demo.exception.TrainerNotFoundException;
+import com.example.demo.exception.TrainerNumberException;
 import com.example.demo.response.ApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
@@ -28,5 +29,11 @@ public class RestExceptionHandler {
                 .map(ObjectError::getDefaultMessage)
                 .collect(Collectors.joining(";"));
         return new ApiError(message);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiError handle(TrainerNumberException trainerNumberException) {
+        return new ApiError(trainerNumberException.getMessage());
     }
 }
