@@ -8,4 +8,6 @@ public interface TrainerService {
     List<TrainerResponse> getTrainersWithoutGroup();
 
     TrainerResponse saveTrainer(String name);
+
+    void deleteTrainer(Long id);
 }

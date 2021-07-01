@@ -26,4 +26,9 @@ public class TrainerServiceImpl implements TrainerService {
         return new TrainerResponse(trainerId,name);
     }
 
+    @Override
+    public void deleteTrainer (Long id) {
+        trainerRepository.deleteTrainer(id);
+    }
+
 }

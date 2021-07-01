@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,8 +26,14 @@ public class TrainerController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public TrainerResponse saveTrainer (@RequestParam("name") String name){
+    public TrainerResponse saveTrainer (@RequestParam("name") @Valid String name){
         System.out.println(name);
         return trainerService.saveTrainer(name);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTrainer(@PathVariable("id") Long id) {
+        trainerService.deleteTrainer(id);
     }
 }
