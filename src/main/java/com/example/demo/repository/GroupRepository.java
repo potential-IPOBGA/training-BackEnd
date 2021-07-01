@@ -12,4 +12,5 @@ public interface GroupRepository {
     @Select("select id,name from group")
     @ResultType(Group.class)
     List<Group> getAllGroup();
+
 }

@@ -15,4 +15,5 @@ public interface TrainerRepository {
     List<Trainer> getTrainersByGroup(Long groupid);
 
 
+
 }
