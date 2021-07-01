@@ -33,6 +33,7 @@ public class TrainerController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTrainer(@PathVariable("id") Long id) {
+
         trainerService.deleteTrainer(id);
     }
 
