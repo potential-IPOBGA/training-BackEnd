@@ -2,6 +2,8 @@ package com.example.demo.beans;
 
 import lombok.*;
 
+import javax.persistence.*;
+
 
 @Data
 @NoArgsConstructor
@@ -9,8 +11,13 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
+@Entity
 public class Trainee {
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
-    private Long groupId;
+    private Boolean grouped;
+    @ManyToOne
+    private Group group;
 }

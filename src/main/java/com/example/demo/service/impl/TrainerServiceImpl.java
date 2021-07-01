@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TrainerServiceImpl implements TrainerService {
@@ -16,20 +17,22 @@ public class TrainerServiceImpl implements TrainerService {
     private TrainerRepository trainerRepository;
 
     @Override
-    public List<TrainerResponse> getTrainersWithoutGroup () {
-        return trainerRepository.getTrainersByGroup(0L);
+    public List<Trainer> getTrainersWithoutGroup(Boolean grouped) {
+        return trainerRepository.findAll()
+                .stream()
+                .filter(trainer -> trainer.getGrouped().equals(grouped))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public TrainerResponse saveTrainer (String name) {
-        final Long trainerId = trainerRepository.saveTrainer(name);
-        System.out.println(trainerId);
-        return new TrainerResponse(trainerId,name);
+    public Trainer saveTrainer(Trainer trainer) {
+        trainerRepository.save(trainer);
+        return trainer;
     }
 
     @Override
-    public void deleteTrainer (Long id) {
-        trainerRepository.deleteTrainer(id);
+    public void deleteTrainer(Long id) {
+        trainerRepository.findById(id).ifPresent(trainerToDelete -> trainerRepository.delete(trainerToDelete));
     }
 
 }

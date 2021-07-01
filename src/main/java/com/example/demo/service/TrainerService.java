@@ -1,13 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.response.TrainerResponse;
+import com.example.demo.beans.Trainer;
 
 import java.util.List;
 
 public interface TrainerService {
-    List<TrainerResponse> getTrainersWithoutGroup();
+    List<Trainer> getTrainersWithoutGroup(Boolean grouped);
 
-    TrainerResponse saveTrainer(String name);
+    Trainer saveTrainer(Trainer trainer);
 
     void deleteTrainer(Long id);
 }

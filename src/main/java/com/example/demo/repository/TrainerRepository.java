@@ -1,28 +1,11 @@
 package com.example.demo.repository;
 
 import com.example.demo.beans.Trainer;
-import com.example.demo.response.TrainerResponse;
-import org.apache.ibatis.annotations.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface TrainerRepository {
+public interface TrainerRepository extends JpaRepository<Trainer,Long> {
 
-    @Select("select id,name from trainer where groupid = #{groupid}")
-    @ResultType(TrainerResponse.class)
-    List<TrainerResponse> getTrainersByGroup(Long groupid);
-
-    @Insert("insert into trainer (name,groupId) VALUES (#{name},0)")
-    @Options(useGeneratedKeys = true)
-    Long saveTrainer(String name);
-
-    @Select("select id,name from trainer where id = #{id}")
-    @ResultType(Trainer.class)
-    Trainer findTrainerById(Long id);
-
-    @Delete("delete from trainer where id = #{id}")
-    void deleteTrainer(Long id);
 
 }

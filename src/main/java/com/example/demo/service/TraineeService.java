@@ -1,14 +1,15 @@
 package com.example.demo.service;
 
+import com.example.demo.beans.Trainee;
 import com.example.demo.response.TraineeResponse;
 import com.example.demo.response.TrainerResponse;
 
 import java.util.List;
 
 public interface TraineeService {
-    List<TraineeResponse> getTraineesWithoutGroup();
+    List<Trainee> getTraineesWithoutGroup(Boolean grouped);
 
-    TraineeResponse saveTrainee(String name);
+    Trainee saveTrainee(Trainee trainee);
 
     void deleteTrainee(Long id);
 }

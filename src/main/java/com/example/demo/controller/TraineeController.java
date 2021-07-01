@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.beans.Trainee;
 import com.example.demo.response.TraineeResponse;
 import com.example.demo.service.TraineeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,14 @@ public class TraineeController {
 //    GET /trainers?grouped=false
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<TraineeResponse> getTraineeWithoutGroup (@RequestParam("grouped") String grouped){
-        return traineeService.getTraineesWithoutGroup();
+    public List<Trainee> getTraineeWithoutGroup (@RequestParam("grouped") Boolean grouped){
+        return traineeService.getTraineesWithoutGroup(grouped);
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public TraineeResponse saveTrainer (@RequestParam("name") @Valid String name){
-        System.out.println(name);
-        return traineeService.saveTrainee(name);
+    public Trainee saveTrainer (@RequestBody @Valid Trainee trainee){
+        return traineeService.saveTrainee(trainee);
     }
 
     @DeleteMapping("/{id}")
@@ -35,4 +35,5 @@ public class TraineeController {
     public void deleteTrainer(@PathVariable("id") Long id) {
         traineeService.deleteTrainee(id);
     }
+
 }

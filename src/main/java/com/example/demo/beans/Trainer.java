@@ -3,23 +3,21 @@ package com.example.demo.beans;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Entity
 public class Trainer {
-    private Long id;
-    @NotBlank
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
-    private Long groupId;
+    private Boolean grouped;
 
-    public Long getId () {
-        return id;
-    }
-
-    public void setId (Long id) {
-        this.id = id;
-    }
+    @ManyToOne
+    private Group group;
 }
