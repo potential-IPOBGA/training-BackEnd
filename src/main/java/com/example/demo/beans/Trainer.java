@@ -9,11 +9,17 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Getter
-@Setter
 public class Trainer {
     private Long id;
     @NotBlank
     private String name;
     private Long groupId;
+
+    public Long getId () {
+        return id;
+    }
+
+    public void setId (Long id) {
+        this.id = id;
+    }
 }

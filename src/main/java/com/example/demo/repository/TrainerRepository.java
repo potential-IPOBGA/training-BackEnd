@@ -14,7 +14,8 @@ public interface TrainerRepository {
     @ResultType(TrainerResponse.class)
     List<TrainerResponse> getTrainersByGroup(Long groupid);
 
-    @Insert("insert into trainer (name) VALUES (#{name})")
+    @Insert("insert into trainer (name,groupId) VALUES (#{name},0)")
+    @Options(useGeneratedKeys = true)
     Long saveTrainer(String name);
 
     @Select("select id,name from trainer where id = #{id}")

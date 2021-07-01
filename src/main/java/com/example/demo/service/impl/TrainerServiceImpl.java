@@ -23,6 +23,7 @@ public class TrainerServiceImpl implements TrainerService {
     @Override
     public TrainerResponse saveTrainer (String name) {
         final Long trainerId = trainerRepository.saveTrainer(name);
+        System.out.println(trainerId);
         return new TrainerResponse(trainerId,name);
     }
 
