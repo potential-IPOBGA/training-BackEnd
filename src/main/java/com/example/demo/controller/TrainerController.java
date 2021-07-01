@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.beans.Trainer;
+import com.example.demo.response.TrainerResponse;
 import com.example.demo.service.TrainerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,14 @@ public class TrainerController {
 //    GET /trainers?grouped=false
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<Trainer> getTrainerWithoutGroup (@RequestParam("grouped") String grouped){
+    public List<TrainerResponse> getTrainerWithoutGroup (@RequestParam("grouped") String grouped){
         return trainerService.getTrainersWithoutGroup();
     }
 
-
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public TrainerResponse saveTrainer (@RequestParam("name") String name){
+        System.out.println(name);
+        return trainerService.saveTrainer(name);
+    }
 }
