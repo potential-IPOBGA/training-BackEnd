@@ -1,1 +1,10 @@
-
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/final_quiz?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: Leiyibin991226
+server:
+  port: 8080
+mybatis:
+  configuration:
+    use-actual-param-name: false
