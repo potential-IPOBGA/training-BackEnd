@@ -63,6 +63,7 @@ public class GroupServiceImpl implements GroupService {
 
     private void groupTrainees (List<Group> allGroup, List<Trainee> allTrainees, int groupSize) {
         for (int i = 0; i < allTrainees.size(); i++) {
+            //todo 下面一行数组越界，原因 自己找
             allGroup.get(i % groupSize).getTrainees().add(allTrainees.get(i));
             allTrainees.get(i).setGrouped(true);
             traineeRepository.save(allTrainees.get(i));
