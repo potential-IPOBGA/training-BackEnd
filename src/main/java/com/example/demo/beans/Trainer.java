@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Entity
 public class Trainer {
     @Id
